@@ -1,0 +1,42 @@
+MPLINK 4.48, Linker
+Linker Map File - Created Thu Jun 17 18:02:34 2021
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000032
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000018      
+            25 out of 8454 program addresses used, program memory utilization is 0%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                   INICIO   0x000001    program     static C:\Users\narut\OneDrive\Documentos\Escuela\Microcomputadoras\Laboratorio\Practica 3\Ejercicio_4.asm
+                      dos   0x000010    program     static C:\Users\narut\OneDrive\Documentos\Escuela\Microcomputadoras\Laboratorio\Practica 3\Ejercicio_4.asm
+                    loop2   0x000007    program     static C:\Users\narut\OneDrive\Documentos\Escuela\Microcomputadoras\Laboratorio\Practica 3\Ejercicio_4.asm
+                  retardo   0x00000c    program     static C:\Users\narut\OneDrive\Documentos\Escuela\Microcomputadoras\Laboratorio\Practica 3\Ejercicio_4.asm
+                     tres   0x00000e    program     static C:\Users\narut\OneDrive\Documentos\Escuela\Microcomputadoras\Laboratorio\Practica 3\Ejercicio_4.asm
+                      uno   0x000012    program     static C:\Users\narut\OneDrive\Documentos\Escuela\Microcomputadoras\Laboratorio\Practica 3\Ejercicio_4.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                   INICIO   0x000001    program     static C:\Users\narut\OneDrive\Documentos\Escuela\Microcomputadoras\Laboratorio\Practica 3\Ejercicio_4.asm
+                    loop2   0x000007    program     static C:\Users\narut\OneDrive\Documentos\Escuela\Microcomputadoras\Laboratorio\Practica 3\Ejercicio_4.asm
+                  retardo   0x00000c    program     static C:\Users\narut\OneDrive\Documentos\Escuela\Microcomputadoras\Laboratorio\Practica 3\Ejercicio_4.asm
+                     tres   0x00000e    program     static C:\Users\narut\OneDrive\Documentos\Escuela\Microcomputadoras\Laboratorio\Practica 3\Ejercicio_4.asm
+                      dos   0x000010    program     static C:\Users\narut\OneDrive\Documentos\Escuela\Microcomputadoras\Laboratorio\Practica 3\Ejercicio_4.asm
+                      uno   0x000012    program     static C:\Users\narut\OneDrive\Documentos\Escuela\Microcomputadoras\Laboratorio\Practica 3\Ejercicio_4.asm
+
+

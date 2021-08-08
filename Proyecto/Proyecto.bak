@@ -1,0 +1,34 @@
+#include <16f877.h>
+#device adc=8 //en caso de emplear el conv. A/D indica resolución de 8 bits
+#fuses HS,NOPROTECT,
+#use delay(clock=20000000)
+#use rs232(baud=9600, xmit=PIN_C6, rcv=PIN_C7)
+#org 0x1F00, 0x1FFF void loader16F877(void) {}
+
+//Variables
+int Entrada_A;
+
+char Entrada_T;
+
+#int_rda
+recep_serie(){
+   //código de la rutina de interrupción
+   Entrada_T = getchar();
+   if (Entrada_T == 'w'){printf("Avanza\n\r"); output_b(0x55);}
+   if (Entrada_T == 's'){printf("Rebersa\n\r"); output_b(0xaa);}
+   if (Entrada_T == 'a'){printf("Izquierda\n\r"); output_b(0x44);}
+   if (Entrada_T == 'd'){printf("Derecha\n\r"); output_b(0x11);}
+   if (Entrada_T == 'x'){printf("Detener\n\r"); output_b(0x00);}
+}
+
+void main()
+{
+   enable_interrupts(INT_RDA); //Recepción de datos por el puerto serie asíncrona
+   enable_interrupts(GLOBAL); //Habilita interrupciones generales
+   
+    while(1){
+         Entrada_A = input_a();
+         #bit var = Entrada_A.0
+         if (var) {output_d(0xff);}
+    }
+}

@@ -1,0 +1,4 @@
+>>> Warning 208 "Proyecto.c" Line 14(1,12): Function not void and does not return a value  recep_serie
+>>> Warning 203 "Proyecto.c" Line 29(1,1): Condition always TRUE
+      Memory usage:   ROM=3%      RAM=4% - 5%
+      0 Errors,  2 Warnings.

@@ -1,0 +1,55 @@
+
+ROM used: 276 (3%)
+          2049 (25%) including unused fragments
+
+          1 Average locations per line
+          9 Average locations per statement
+
+RAM used: 14 (4%) at main() level
+          17 (5%) worst case
+
+Stack used: 2 worst case (out of 8 total available)
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   35    32 100  Proyecto.c
+  298     0   0  ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\devices\16f877.h
+----- -----
+  333    32 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+3      1   0   0     5  1.0  loader16F877
+0     87  32   0   413  2.7  recep_serie
+0      5   2   0    48  1.4  @const70
+0     72  26   3             @PSTRINGC7_9600_62_63
+0      5   2   0             @const72
+0      6   2   0             @const73
+0      5   2   0             @const74
+0      5   2   0    67  1.6  @const75
+0     41  15   0   172  2.9  MAIN
+
+Program metrics:
+    Functions               5
+    Statements              32
+    Comments                72
+    Volume (V)              983
+    Difficilty (D)          9.3
+    Effort to implement (E) 9169
+    Time to implement (T)   8 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   6
+    Maintainability (MI)    94
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00003     4  0  
+00004-00030    45  0  
+00031-007FF   226  1773  
+00800-00FFF     0  2048  
+01000-017FF     0  2048  
+01800-01EFF     0  1792  
+01F00-01FFF     1  255  
+
+
+

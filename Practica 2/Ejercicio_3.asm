@@ -1,0 +1,40 @@
+PROCESSOR 16f877
+INCLUDE <p16f877.inc>
+
+ORG 0
+GOTO INICIO
+ORG 5
+
+INICIO: 
+
+		MOVLW H'16'		;W = 16 - Numero de pasadas
+		MOVWF H'30'		;30 = W
+PASADA:
+		DECF H'30'		;Decrementamos a 30
+		BTFSC STATUS, Z	;Si no es cero salta
+		GOTO $			;FIN
+		MOVLW H'20'		;W = 20
+		MOVWF FSR		;FSR = W
+SIGUENTE:
+		MOVLW H'2F'		;W = 2F
+		XORWF FSR, 0	;W = W XOR FSR 
+		BTFSC STATUS, Z	;Si no es cero salta
+		GOTO PASADA		;Nueva pasada
+		MOVF INDF, 0	;W = INDF
+		MOVWF H'31'		;30 = W
+		INCF FSR, 1		;FSR++
+		SUBWF INDF, 0	;W = INDF - W
+		BTFSC STATUS, C	;If (Positivo) salta
+		GOTO SIGUENTE
+		GOTO CAMBIO
+		
+CAMBIO:
+		MOVF INDF, 0
+		MOVWF H'32'
+		MOVF H'31', W
+		MOVWF INDF
+		DECF FSR, 1
+		MOVF H'32', W
+		MOVWF INDF
+		GOTO SIGUENTE
+		END

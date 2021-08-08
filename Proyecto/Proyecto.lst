@@ -1,0 +1,233 @@
+CCS PCM C Compiler, Version 4.104, 5967               07-ago.-21 15:34
+
+               Filename: C:\Users\narut\OneDrive\Documentos\Escuela\Microcomputadoras\Laboratorio\Proyecto\Proyecto.lst
+
+               ROM used: 276 words (3%)
+                         Largest free fragment is 2048
+               RAM used: 14 (4%) at main() level
+                         17 (5%) worst case
+               Stack:    2 worst case (0 in main + 2 for interrupts)
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   0EA
+0003:  NOP
+0004:  MOVWF  7F
+0005:  SWAPF  03,W
+0006:  CLRF   03
+0007:  MOVWF  21
+0008:  MOVF   0A,W
+0009:  MOVWF  20
+000A:  CLRF   0A
+000B:  MOVF   04,W
+000C:  MOVWF  22
+000D:  MOVF   77,W
+000E:  MOVWF  23
+000F:  MOVF   78,W
+0010:  MOVWF  24
+0011:  MOVF   79,W
+0012:  MOVWF  25
+0013:  MOVF   7A,W
+0014:  MOVWF  26
+0015:  BCF    03.7
+0016:  BCF    03.5
+0017:  MOVLW  8C
+0018:  MOVWF  04
+0019:  BTFSS  00.5
+001A:  GOTO   01D
+001B:  BTFSC  0C.5
+001C:  GOTO   02E
+001D:  MOVF   22,W
+001E:  MOVWF  04
+001F:  MOVF   23,W
+0020:  MOVWF  77
+0021:  MOVF   24,W
+0022:  MOVWF  78
+0023:  MOVF   25,W
+0024:  MOVWF  79
+0025:  MOVF   26,W
+0026:  MOVWF  7A
+0027:  MOVF   20,W
+0028:  MOVWF  0A
+0029:  SWAPF  21,W
+002A:  MOVWF  03
+002B:  SWAPF  7F,F
+002C:  SWAPF  7F,W
+002D:  RETFIE
+002E:  BCF    0A.3
+002F:  BCF    0A.4
+0030:  GOTO   079
+.................... #include <16f877.h> 
+.................... //////// Standard Header file for the PIC16F877 device //////////////// 
+.................... #device PIC16F877 
+.................... #list 
+....................  
+.................... #device adc=8 //en caso de emplear el conv. A/D indica resolución de 8 bits 
+.................... #fuses HS,NOPROTECT, 
+.................... #use delay(clock=20000000) 
+.................... #use rs232(baud=9600, xmit=PIN_C6, rcv=PIN_C7) 
+.................... #org 0x1F00, 0x1FFF void loader16F877(void) {} 
+*
+1F00:  RETURN
+....................  
+.................... //Variables 
+.................... int Entrada_A; 
+....................  
+.................... char Entrada_T; 
+....................  
+.................... #int_rda 
+.................... recep_serie(){ 
+....................    //código de la rutina de interrupción 
+....................    Entrada_T = getchar(); 
+*
+0079:  BTFSS  0C.5
+007A:  GOTO   079
+007B:  MOVF   1A,W
+007C:  MOVWF  28
+....................    if (Entrada_T == 'w'){printf("Avanza\n\r"); output_b(0x55);} 
+007D:  MOVF   28,W
+007E:  SUBLW  77
+007F:  BTFSS  03.2
+0080:  GOTO   08D
+0081:  MOVLW  D0
+0082:  BSF    03.6
+0083:  MOVWF  0D
+0084:  MOVLW  00
+0085:  MOVWF  0F
+0086:  BCF    03.6
+0087:  CALL   031
+0088:  BSF    03.5
+0089:  CLRF   06
+008A:  MOVLW  55
+008B:  BCF    03.5
+008C:  MOVWF  06
+....................    if (Entrada_T == 's'){printf("Rebersa\n\r"); output_b(0xaa);} 
+008D:  MOVF   28,W
+008E:  SUBLW  73
+008F:  BTFSS  03.2
+0090:  GOTO   09D
+0091:  MOVLW  D5
+0092:  BSF    03.6
+0093:  MOVWF  0D
+0094:  MOVLW  00
+0095:  MOVWF  0F
+0096:  BCF    03.6
+0097:  CALL   031
+0098:  BSF    03.5
+0099:  CLRF   06
+009A:  MOVLW  AA
+009B:  BCF    03.5
+009C:  MOVWF  06
+....................    if (Entrada_T == 'a'){printf("Izquierda\n\r"); output_b(0x44);} 
+009D:  MOVF   28,W
+009E:  SUBLW  61
+009F:  BTFSS  03.2
+00A0:  GOTO   0AD
+00A1:  MOVLW  DA
+00A2:  BSF    03.6
+00A3:  MOVWF  0D
+00A4:  MOVLW  00
+00A5:  MOVWF  0F
+00A6:  BCF    03.6
+00A7:  CALL   031
+00A8:  BSF    03.5
+00A9:  CLRF   06
+00AA:  MOVLW  44
+00AB:  BCF    03.5
+00AC:  MOVWF  06
+....................    if (Entrada_T == 'd'){printf("Derecha\n\r"); output_b(0x11);} 
+00AD:  MOVF   28,W
+00AE:  SUBLW  64
+00AF:  BTFSS  03.2
+00B0:  GOTO   0BD
+00B1:  MOVLW  E0
+00B2:  BSF    03.6
+00B3:  MOVWF  0D
+00B4:  MOVLW  00
+00B5:  MOVWF  0F
+00B6:  BCF    03.6
+00B7:  CALL   031
+00B8:  BSF    03.5
+00B9:  CLRF   06
+00BA:  MOVLW  11
+00BB:  BCF    03.5
+00BC:  MOVWF  06
+....................    if (Entrada_T == 'x'){printf("Detener\n\r"); output_b(0x00);} 
+00BD:  MOVF   28,W
+00BE:  SUBLW  78
+00BF:  BTFSS  03.2
+00C0:  GOTO   0CC
+00C1:  MOVLW  E5
+00C2:  BSF    03.6
+00C3:  MOVWF  0D
+00C4:  MOVLW  00
+00C5:  MOVWF  0F
+00C6:  BCF    03.6
+00C7:  CALL   031
+00C8:  BSF    03.5
+00C9:  CLRF   06
+00CA:  BCF    03.5
+00CB:  CLRF   06
+.................... } 
+....................  
+00CC:  BCF    0C.5
+00CD:  BCF    0A.3
+00CE:  BCF    0A.4
+00CF:  GOTO   01D
+.................... void main() 
+.................... { 
+*
+00EA:  CLRF   04
+00EB:  BCF    03.7
+00EC:  MOVLW  1F
+00ED:  ANDWF  03,F
+00EE:  MOVLW  81
+00EF:  BSF    03.5
+00F0:  MOVWF  19
+00F1:  MOVLW  A6
+00F2:  MOVWF  18
+00F3:  MOVLW  90
+00F4:  BCF    03.5
+00F5:  MOVWF  18
+00F6:  BSF    03.5
+00F7:  BSF    1F.0
+00F8:  BSF    1F.1
+00F9:  BSF    1F.2
+00FA:  BCF    1F.3
+....................    enable_interrupts(INT_RDA); //Recepción de datos por el puerto serie asíncrona 
+00FB:  BSF    0C.5
+....................    enable_interrupts(GLOBAL); //Habilita interrupciones generales 
+00FC:  MOVLW  C0
+00FD:  BCF    03.5
+00FE:  IORWF  0B,F
+....................     
+....................     while(1){ 
+....................          Entrada_A = input_a(); 
+00FF:  MOVLW  FF
+0100:  BSF    03.5
+0101:  MOVWF  05
+0102:  BCF    03.5
+0103:  MOVF   05,W
+0104:  MOVWF  27
+....................          #bit A_0 = Entrada_A.0 
+....................          if (A_0) {output_d(0xff);} else {output_d(0x00);} 
+0105:  BTFSS  27.0
+0106:  GOTO   10D
+0107:  BSF    03.5
+0108:  CLRF   08
+0109:  MOVLW  FF
+010A:  BCF    03.5
+010B:  MOVWF  08
+010C:  GOTO   111
+010D:  BSF    03.5
+010E:  CLRF   08
+010F:  BCF    03.5
+0110:  CLRF   08
+....................     } 
+0111:  GOTO   0FF
+.................... } 
+0112:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F72   HS NOWDT PUT NOPROTECT BROWNOUT NOLVP NOCPD NOWRT NODEBUG
